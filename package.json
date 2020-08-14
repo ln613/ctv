@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ln613/css": "^1.1.1",
+    "@ln613/util": "^1.12.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "hookompose": "^0.12.6",
+    "ramda": "^0.27.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.2"
@@ -13,6 +17,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "func": "netlify-lambda serve functions -t 1000 -p 9001",
+    "func-live": "netlify-lambda serve functions -p 9001",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
