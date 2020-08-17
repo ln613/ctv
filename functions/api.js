@@ -36,6 +36,9 @@ exports.handler = async (event, context) => {
         case 'chs':
           r = await fetch(url.replace('{0}', 'getchs/' + q.cat));
           break;
+        case 'ch':
+          r = (await fetch(url.replace('{0}', 'chinfo/' + q.epg))).lives;
+          break;
         default:
           break;
       }

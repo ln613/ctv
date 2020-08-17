@@ -1,6 +1,10 @@
+import { flHost, domain } from './const';
+
 const isDev = process.env.NODE_ENV === 'development';
 const host = isDev ? 'http://localhost:9001' : '/.netlify/functions';
-const url = host + '/api?type={type}&cat={cat}';
+const url = host + '/api?type={type}&cat={cat}&epg={epg}';
+const addDays = (d, n) => new Date(d.setDate(d.getDate() + n))
+const setCookie = (k, v) => document.cookie = `${k}=${v}; domain=${domain}; expires=${addDays(new Date()).toUTCString()}`;
 
 // export const loadCategories = () => ({
 //   path: 'cats',
@@ -13,4 +17,15 @@ export const loadChannels = ({ cat }) => ({
   path: `cats[cat=${cat}].chs`,
   url,
   params: { type: 'chs', cat },
+})
+
+export const loadChannel = ({ cat, epg = '' }) => ({
+  isValid: epg,
+  path: `cats[cat=${cat}].chs[epg=${epg}].live`,
+  url,
+  params: { type: 'ch', epg, cat },
+  done: r => {
+    const l = r.find(x => x.urlvip.toString() === '0' && x.url.slice(-2) === 'hd')
+    window.open(`${flHost}embed/hlsjs?${(l || r[0]).url}`, '_blank')
+  }
 })
