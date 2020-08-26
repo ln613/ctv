@@ -24,8 +24,11 @@ export const loadChannel = ({ cat, epg = '' }) => ({
   path: `cats[cat=${cat}].chs[epg=${epg}].live`,
   url,
   params: { type: 'ch', epg, cat },
-  done: r => {
-    const l = r.find(x => x.urlvip.toString() === '0' && x.url.slice(-2) === 'hd')
-    window.open(`${flHost}embed/hlsjs?${(l || r[0]).url}`, '_blank')
+  done: r => {console.log(r)
+    r = r.filter(x => x.urlvip.toString() === '0');
+    if (r.length > 0) {
+      const l = r.find(x => x.url.slice(-2) === 'hd') || r[0];
+      window.open(`${flHost}embed/${l.player}?${l.url}`, '_blank');
+    }
   }
 })
