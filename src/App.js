@@ -44,8 +44,8 @@ const App = p =>
       <i class="fas fa-spinner fa-spin fa-4x pr" style={{ top: '50%', left: '50%' }}></i>
     </div>
     }
-    <div class="vh">
-      <iframe src={flHost} height="300"></iframe>
+    <div>
+      <iframe src={flHost} height="1" width="100%"></iframe>
     </div>
   </>
 
